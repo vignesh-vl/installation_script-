@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- All content copyright Terracotta, Inc., unless otherwise indicated. All rights reserved. -->
+<tc:tc-config xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-5.xsd"
+xmlns:tc="http://www.terracotta.org/config"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+<tc-properties>
+   <property name="l2.nha.dirtydb.autoDelete" value="true"/>
+    <property name="l2.nha.dirtydb.rolling" value="2"/>
+    <property name="l1.cachemanager.enabled" value="true"/>
+ </tc-properties>
+  
+  <servers>
+    <!-- If using a standby Terracotta server, also referred to as an ACTIVE-PASSIVE configuration, add the second server here. -->
+     <mirror-group group-name="group1">
+       <server host="localhost" name="Server1">
+          <!--This is absolute file path and needs to be configured -->
+          <data>/ServerData/Terracotta/server1/server-data</data>
+          <logs>/ServerData/Terracotta/server1/server-logs</logs>
+             <dataStorage size="4g">
+             <offheap size="2g"/>
+             <hybrid/>
+             </dataStorage>
+          <tsa-port>9510</tsa-port>
+          <jmx-port>9520</jmx-port>
+          <tsa-group-port>9530</tsa-group-port>
+      </server>
+      <!--The input value for name attribute is the server name -->
+           </mirror-group>
+ 
+ <garbage-collection>
+ 
+      <enabled>true</enabled>
+ 
+      <verbose>false</verbose>
+ 
+      <interval>3600</interval>
+    </garbage-collection>
+ 
+    <restartable enabled="false"/>
+    <failover-priority>AVAILABILITY</failover-priority>
+ 
+    <client-reconnect-window>120</client-reconnect-window>
+ 
+  </servers>
+  <!-- Sets where the generated client logs are saved on clients. Note that the exact location of Terracotta logs on client machines may vary based on the value of user.home and the local disk layout. -->
+  <clients>
+    <logs>/ServerData/Terracotta/client4x/client-logs%D</logs>
+  </clients>
+</tc:tc-config>

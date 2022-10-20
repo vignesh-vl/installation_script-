@@ -1,0 +1,8 @@
+# specify where you need to install api gateway
+path =/home/vignesh
+
+path2=/home/vignesh
+
+apigateway_directory_name_key_1=apigateway1
+
+apigateway_directory_name_key_2=apigateway2

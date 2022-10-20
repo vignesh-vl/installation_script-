@@ -1,0 +1,33 @@
+./SoftwareAGInstaller-Linux_x86_64.bin  -readScript apigateway2_script
+
+./SoftwareAGInstaller-Linux_x86_64.bin  -readScript elastic_search_script 
+
+
+# starting the  apigateway1
+
+cd  $path/apigateway1/IntegrationServer/instances/default/bin/
+
+sudo ./startup.sh
+
+   
+until $(curl --output /dev/null  --silent --head --fail http://localhost:5555); do
+    sleep 10
+done
+
+echo "the apigateway1 is up"
+
+# starting the apigateway2
+
+cd  $path/apigateway2/IntegrationServer/instances/default/bin/
+
+sudo ./startup.sh
+
+
+until $(curl --output /dev/null  --silent --head --fail http://localhost:7777); do
+    sleep 10
+done
+
+echo "the apigateway2 is up"
+
+
+

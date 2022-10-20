@@ -1,0 +1,12 @@
+                                                                                                                                                                 
+# reading the values from the property files  
+pwd=`pwd`
+
+# reading  the path value from the property file 
+
+path=`cat $pwd/property_file| grep "path"| cut -d"=" -f2 `
+
+directory_1=`cat $pwd/property_file| grep "apigateway_directory_name_key_1"| cut -d"=" -f2 `
+
+directory_2=`cat $pwd/property_file| grep "apigateway_directory_name_key_2"| cut -d"=" -f2 `
+ echo $directory_2
